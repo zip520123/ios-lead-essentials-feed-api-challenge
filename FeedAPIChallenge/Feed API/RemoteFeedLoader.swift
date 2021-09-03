@@ -39,29 +39,29 @@ private struct FeedLoaderResultMapper {
 			return .failure(RemoteFeedLoader.Error.connectivity)
 		}
 	}
-}
 
-private struct RemoteFeedLoadImagesRoot: Decodable {
-	let items: [RemoteFeedLoadImage]
-	var images: [FeedImage] {
-		items.map { $0.feedImage }
-	}
-}
-
-private struct RemoteFeedLoadImage: Decodable {
-	let id: UUID
-	let desc: String?
-	let location: String?
-	let url: URL
-
-	enum CodingKeys: String, CodingKey {
-		case id = "image_id"
-		case desc = "image_desc"
-		case location = "image_loc"
-		case url = "image_url"
+	private struct RemoteFeedLoadImagesRoot: Decodable {
+		let items: [RemoteFeedLoadImage]
+		var images: [FeedImage] {
+			items.map { $0.feedImage }
+		}
 	}
 
-	var feedImage: FeedImage {
-		FeedImage(id: id, description: desc, location: location, url: url)
+	private struct RemoteFeedLoadImage: Decodable {
+		let id: UUID
+		let desc: String?
+		let location: String?
+		let url: URL
+
+		enum CodingKeys: String, CodingKey {
+			case id = "image_id"
+			case desc = "image_desc"
+			case location = "image_loc"
+			case url = "image_url"
+		}
+
+		var feedImage: FeedImage {
+			FeedImage(id: id, description: desc, location: location, url: url)
+		}
 	}
 }
