@@ -50,7 +50,7 @@ private struct RemoteFeedLoadImage: Decodable {
 	let location: String?
 	let url: URL
 
-	enum Codingkeys: String, CodingKey {
+	enum CodingKeys: String, CodingKey {
 		case id = "image_id"
 		case desc = "image_desc"
 		case location = "image_loc"
