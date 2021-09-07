@@ -40,19 +40,6 @@ private struct FeedLoaderResultMapper {
 		}
 	}
 
-	static func map(_ result: HTTPClient.Result) -> FeedLoader.Result {
-		switch result {
-		case let .success((data, response)):
-			if response.statusCode == 200, let root = try? JSONDecoder().decode(RemoteFeedLoadImagesRoot.self, from: data) {
-				return .success(root.images)
-			} else {
-				return .failure(RemoteFeedLoader.Error.invalidData)
-			}
-		case .failure:
-			return .failure(RemoteFeedLoader.Error.connectivity)
-		}
-	}
-
 	private struct RemoteFeedLoadImagesRoot: Decodable {
 		let items: [RemoteFeedLoadImage]
 		var images: [FeedImage] {
