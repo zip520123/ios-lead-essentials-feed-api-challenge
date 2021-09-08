@@ -43,7 +43,7 @@ private struct FeedLoaderResultMapper {
 	private struct RemoteFeedLoadImagesRoot: Decodable {
 		let items: [RemoteFeedLoadImage]
 		var images: [FeedImage] {
-			items.map { $0.feedImage }
+			items.map(\.feedImage)
 		}
 	}
 
